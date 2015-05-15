@@ -33,7 +33,7 @@ module.exports = function(grunt){
         },
 
         package :{
-            name : 'testwidget'
+            name : 'qtlcharts'
         },
 /*
         coffee: {
@@ -63,7 +63,7 @@ module.exports = function(grunt){
                     expand: true,
                     cwd: '<%= src.lib %>',
                     src: ['**'],
-                    dest: '<%= dist.root %>' + '/' + '<%= package.name %>' + "/inst/htmlwidgets/lib/"
+                    dest: '<%= dist.root %>' + "/inst/htmlwidgets/lib/"
                 }]
             }
         },
