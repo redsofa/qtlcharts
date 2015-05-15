@@ -20,12 +20,16 @@ module.exports = function(grunt){
     //Install into R
     grunt.registerTask('install', ['uninstall', 'build', 'shell:installLibIntoR']);
 
+    //quick test target
+    grunt.registerTask('quicktest', ['install', 'shell:quickTest']);
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
         dist:{
             root : './dist',
-            qtlchartsroot : '<%= dist.root %>/qtlcharts'
+            qtlchartsroot : '<%= dist.root %>/qtlcharts',
+            scratchroot :  '<%= dist.root %>/scratch'
         },
 
         src:{
@@ -91,6 +95,14 @@ module.exports = function(grunt){
             },
             removeLibFromR:{
                 command: "R -e 'remove.packages(\"'<%= package.name %>'\")'"
+            },
+            quickTest:{
+                command: [
+                            "mkdir <%= dist.scratchroot %>",
+                            "cp <%= src.root %>/tests/testiPlotScanOne.R '<%= dist.scratchroot %>'",
+                            "cd '<%= dist.scratchroot %>'",
+                            "R -e 'source (\"testiPlotScanOne.R\") ;'",
+                         ].join('&&')
             }
         },
 
@@ -98,7 +110,7 @@ module.exports = function(grunt){
             options:{
                 force : true
             },
-            all: ["./<%= dist.root %>"]
+            dist : ["./<%= dist.root %>"]
         },
 
         watch: {

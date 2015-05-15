@@ -210,9 +210,11 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                          p = d3.format(".1f")(d.pos)
                          g_curvechart.select("g.title text").text("#{d.chr}@#{p}")
                          g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 1)
+                         return
                 .on "mouseout", (d) ->
                          lodchart_curves.remove()
                          g_lodchart.select("g.title text").text("")
                          effchart_curves.remove()
                          g_curvechart.select("g.title text").text("")
                          g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 0)
+                         return
