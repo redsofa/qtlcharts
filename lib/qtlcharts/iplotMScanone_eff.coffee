@@ -60,6 +60,75 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                    .datum(lod_data)
                    .call(mylodheatmap)
 
+    console.log(lod_data)
+
+    data = [ [ 0.85392, 4.7951, null ],
+             [ 1.9479, 6.6572, null ],
+             [ 3.4672, 5.1628, null ]
+             [ 0.5341, null, null ],
+             [ 0.86976, null, 11.845 ],
+             [ 1.0733, null, 9.1581 ],
+             [ 2.2701, null, 7.4126 ],
+             [ 1.3735, null, 9.1597 ],
+             [ 1.9994, null, 4.9451 ],
+             [ 2.8514, 7.7496,   11.8 ],
+             [ 3.0381, 10.033, 15.951 ],
+             [  2.623, 6.2569, 10.064 ],
+             [ 2.8918, 2.1806, 2.7553 ],
+             [ 3.1928, 3.8717,  11.03 ],
+             [ 2.8945, 4.6485, 7.5412 ],
+             [ 1.7352,  2.323, 8.5668 ],
+             [ 3.6079, 7.5651, 13.068 ],
+             [ 0.29697, 0.96564, 4.7644 ],
+             [ 4.2971, 7.6257, 13.682 ],
+             [ 1.4184, 3.9942, 7.4658 ],
+             [ 2.6927, 6.0563, 9.8373 ],
+             [ 3.3326, 5.2795, 9.4982 ],
+             [ 0.91039,  7.124, 16.547 ],
+             [ 2.9352, 5.6384, 12.084 ],
+             [  2.247, 4.9576, 11.219 ],
+             [ 1.8186, 6.6697, 15.099 ],
+             [ 2.6873, 5.9696, 12.492 ],
+             [ 1.5871, 7.1438, 16.851 ],
+             [ 0.64619, 4.6698, 8.4931 ],
+             [ 1.1519, 5.5712, 10.065 ],
+             [ 0.97719, 5.8791, 13.075 ],
+             [ 1.4067, 4.9597, 13.569 ],
+             [ 2.0785, 1.2614, 4.4511 ],
+             [ 1.6042, 2.9743, 9.1356 ],
+             [ 1.6446, 4.0385, 7.7958 ],
+             [ 0.8464, 2.6913, 10.386 ],
+             [ 2.0101, 7.8212, 12.579 ],
+             [ 0.61775, -0.37013, 6.0409 ],
+             [ 2.3648, 3.5159, 9.3037 ],
+             [ 1.2657,  2.586, 8.6622 ],
+             [ 1.6426, 2.6698, 10.807 ],
+             [ 1.7594, 5.8972, 11.623 ],
+             [ 0.89567, 5.3262,  10.93 ],
+             [ 1.1821, 3.8296, 9.9749 ],
+             [ 1.8198, 6.7594, 12.653 ],
+             [ 1.4634, 3.0375, 9.3865 ],
+             [ 3.7619, 9.4365, 14.281 ],
+             [ 1.4458, 3.2316, 8.5586 ]]
+
+    mylodchart = scatterplot()
+      .xvar(0)
+      .yvar(1)
+      .xlab("X1")
+      .ylab("X2")
+      .height(hbot-margin.top-margin.bottom)
+      .width(wleft-margin.left-margin.right)
+      .margin(margin)
+
+    g_lodchart = svg.append("g")
+      .attr("transform", "translate(0,#{htop})")
+      .attr("id", "lodchart")
+      .datum({data:data})
+      .call(mylodchart)
+
+
+
+    ###
     mylodchart = lodchart().height(hbot-margin.top-margin.bottom)
                            .width(wleft-margin.left-margin.right)
                            .margin(margin)
@@ -84,6 +153,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                   d3.svg.line()
                     .x((d) -> mylodchart.xscale()[chr](d))
                     .y((d,i) -> mylodchart.yscale()(Math.abs(lod_data.lodByChr[chr][i][lodcolumn])))
+    ###
 
     # plot lod curves for selected LOD column
     lodchart_curves = null
@@ -204,7 +274,7 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
 
     mylodheatmap.cellSelect()
                 .on "mouseover", (d) ->
-                         plotLodCurve(d.lodindex)
+                         #plotLodCurve(d.lodindex)
                          g_lodchart.select("g.title text").text("#{lod_labels[d.lodindex]}")
                          plotEffCurves(posindex[d.chr][d.pos])
                          p = d3.format(".1f")(d.pos)
@@ -212,9 +282,11 @@ iplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
                          g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 1)
                          return
                 .on "mouseout", (d) ->
-                         lodchart_curves.remove()
+                         #lodchart_curves.remove()
                          g_lodchart.select("g.title text").text("")
                          effchart_curves.remove()
                          g_curvechart.select("g.title text").text("")
                          g_curvechart.select("text#xaxis#{d.lodindex}").attr("opacity", 0)
                          return
+                .on "click", (d) ->
+                         alert("hello")
