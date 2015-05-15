@@ -24,7 +24,8 @@ module.exports = function(grunt){
         pkg: grunt.file.readJSON('package.json'),
 
         dist:{
-            root : './dist'
+            root : './dist',
+            qtlchartsroot : '<%= dist.root %>/qtlcharts'
         },
 
         src:{
@@ -45,7 +46,7 @@ module.exports = function(grunt){
                 flatten: true,
                 cwd: '<%= src.lib %>' + '/qtlcharts/',
                 src: ['*.coffee'],
-                dest: '<%= dist.root %>/inst/htmlwidgets/lib/qtlcharts/',
+                dest: '<%= dist.qtlchartsroot %>/inst/htmlwidgets/lib/qtlcharts/',
                 ext: '.js'
             },
             compileWidgets:{
@@ -53,7 +54,7 @@ module.exports = function(grunt){
                 flatten: true,
                 cwd: '<%= src.root %>' + '/inst/htmlwidgets/',
                 src: ['*.coffee'],
-                dest: '<%= dist.root %>/inst/htmlwidgets/',
+                dest: '<%= dist.qtlchartsroot %>/inst/htmlwidgets/',
                 ext: '.js'
             }
         },
@@ -64,7 +65,7 @@ module.exports = function(grunt){
                     expand: true,
                     cwd: '<%= src.root %>',
                     src: ['**','!**/*.coffee'],
-                    dest: '<%= dist.root %>'
+                    dest: '<%= dist.qtlchartsroot %>'
                 }]
             },
             lib:{
@@ -72,7 +73,7 @@ module.exports = function(grunt){
                     expand: true,
                     cwd: '<%= src.lib %>',
                     src: ['**','!qtlcharts/*.coffee'],
-                    dest: '<%= dist.root %>' + "/inst/htmlwidgets/lib/"
+                    dest: '<%= dist.qtlchartsroot %>' + "/inst/htmlwidgets/lib/"
                 }]
             }
         },
@@ -86,7 +87,7 @@ module.exports = function(grunt){
                 command: "R -e 'library(devtools);document()'"
             },
             installLibIntoR: {
-                command: "R -e 'setwd(\"'<%= dist.root %>'/'<%= package.name %>'\");devtools::install()'"
+                command: "R -e 'setwd(\"'<%= dist.qtlchartsroot %>'\");devtools::install()'"
             },
             removeLibFromR:{
                 command: "R -e 'remove.packages(\"'<%= package.name %>'\")'"
