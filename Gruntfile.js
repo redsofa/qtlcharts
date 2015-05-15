@@ -12,7 +12,7 @@ module.exports = function(grunt){
     grunt.registerTask('default', ['build']);
 
     //Build
-    grunt.registerTask('build', ['clean', 'copy:src' , 'copy:lib', 'coffee:compileQtlCharts']);
+    grunt.registerTask('build', ['clean', 'copy:src' , 'copy:lib', 'coffee']);
 
     //Uninstall from R
     grunt.registerTask('uninstall', ['shell:removeLibFromR']);
@@ -46,6 +46,14 @@ module.exports = function(grunt){
                 cwd: '<%= src.lib %>' + '/qtlcharts/',
                 src: ['*.coffee'],
                 dest: '<%= dist.root %>/inst/htmlwidgets/lib/qtlcharts/',
+                ext: '.js'
+            },
+            compileWidgets:{
+                expand: true,
+                flatten: true,
+                cwd: '<%= src.root %>' + '/inst/htmlwidgets/',
+                src: ['*.coffee'],
+                dest: '<%= dist.root %>/inst/htmlwidgets/',
                 ext: '.js'
             }
         },
