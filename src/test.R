@@ -1,0 +1,8 @@
+library(qtl)
+library(qtlcharts)
+data(grav)
+grav <- calc.genoprob(grav, step=1)
+grav <- reduce2grid(grav)
+phecol <- 1:nphe(grav)
+out <- scanone(grav, phe=phecol)
+iplotMScanone(out)
