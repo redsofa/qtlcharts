@@ -103,7 +103,7 @@ module.exports = function(grunt){
 
         watch: {
             scripts: {
-                files: ['**/*.js', '**/*.R'],
+                files: ['lib/qtlcharts/**.coffee', 'src/**/*.js', 'src/**/*.coffee', 'src/**/*.R'],
                 tasks: ['install'],
                 options: {
                         nospawn: true
