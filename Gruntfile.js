@@ -12,7 +12,7 @@ module.exports = function(grunt){
     grunt.registerTask('default', ['build']);
 
     //Build
-    grunt.registerTask('build', ['copy:full' , 'copy:lib']);
+    grunt.registerTask('build', ['clean', 'copy:src' , 'copy:lib', 'coffee:compileQtlCharts']);
 
     //Uninstall from R
     grunt.registerTask('uninstall', ['shell:removeLibFromR']);
@@ -35,26 +35,27 @@ module.exports = function(grunt){
         package :{
             name : 'qtlcharts'
         },
-/*
+
         coffee: {
             options: {
                 bare: true
             },
-            compile: {
-                files: {
-                    'inst/htmlwidgets/lib/panels/scatterplot/scatterplot.js': 'inst/htmlwidgets/lib/panels/scatterplot/scatterplot.coffee',
-                    'inst/htmlwidgets/lib/panels/panelutil.js': 'inst/htmlwidgets/lib/panels/panelutil.coffee',
-                    'inst/htmlwidgets/iplot.js' : 'inst/htmlwidgets/iplot.coffee'
-                }
+            compileQtlCharts: {
+                expand: true,
+                flatten: true,
+                cwd: '<%= src.lib %>' + '/qtlcharts/',
+                src: ['*.coffee'],
+                dest: '<%= dist.root %>/inst/htmlwidgets/lib/qtlcharts/',
+                ext: '.js'
             }
         },
-*/
+
         copy: {
-            full: {
+            src: {
                 files: [{
                     expand: true,
                     cwd: '<%= src.root %>',
-                    src: ['**'],
+                    src: ['**','!**/*.coffee'],
                     dest: '<%= dist.root %>'
                 }]
             },
@@ -62,7 +63,7 @@ module.exports = function(grunt){
                 files:[{
                     expand: true,
                     cwd: '<%= src.lib %>',
-                    src: ['**'],
+                    src: ['**','!qtlcharts/*.coffee'],
                     dest: '<%= dist.root %>' + "/inst/htmlwidgets/lib/"
                 }]
             }
