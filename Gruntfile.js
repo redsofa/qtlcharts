@@ -6,7 +6,7 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-coffee');
 
-    //Build targets
+    //Build target
 
     //Default target
     grunt.registerTask('default', ['build']);
@@ -99,9 +99,9 @@ module.exports = function(grunt){
             quickTest:{
                 command: [
                             "mkdir <%= dist.scratchroot %>",
-                            "cp <%= src.root %>/tests/testiPlotScanOne.R '<%= dist.scratchroot %>'",
+                            "cp <%= src.root %>/tests/testmplotMScanOne.R '<%= dist.scratchroot %>'",
                             "cd '<%= dist.scratchroot %>'",
-                            "R -e 'source (\"testiPlotScanOne.R\") ;'",
+                            "R -e 'source (\"testmplotMScanOne.R\") ;'",
                          ].join('&&')
             }
         },
