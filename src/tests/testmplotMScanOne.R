@@ -22,7 +22,6 @@ mplotMScanone(out)
 mplotMScanone(out, times=times)
 
 
-
 # plot with QTL effects included (and with quantitative y-axis)
 plot <- mplotMScanone(out, times=times,
               chartOpts=list(eff_ylab="QTL effect", eff_xlab="Time (hrs)"))
