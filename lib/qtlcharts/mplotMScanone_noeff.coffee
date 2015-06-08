@@ -2,7 +2,7 @@
 # Original author is Karl W Broman.
 # Modifications (and bugs) are Rene Richard's
 
-mplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
+mplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
   # chartOpts start
   height = chartOpts?.height ? 700 # height of chart in pixels
   width = chartOpts?.width ? 1000 # width of chart in pixels
@@ -53,7 +53,7 @@ mplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
   .zthresh(zthresh)
   .quantScale(times)
   .lod_labels(lod_labels)
-  .ylab(lod_ylab)
+  .ylab("Time (hrs)")
   .nullcolor(nullcolor)
 
   svg = d3.select(widgetdiv).select("svg")
@@ -75,6 +75,7 @@ mplotMScanone_eff = (widgetdiv, lod_data, eff_data, times, chartOpts) ->
   .lightrect(lightrect)
   .ylim([0, d3.max(mylodheatmap.zlim())])
   .pointsAtMarkers(false)
+  .ylab("Expression Value")
 
   g_lodchart = svg.append("g")
   .attr("transform", "translate(0,#{htop})")

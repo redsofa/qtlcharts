@@ -26,4 +26,4 @@ dependencies:
     src: htmlwidgets/lib/qtlcharts
     version: 0.1.1
     script:
-      - mplotMScanone_eff.js
+      - mplotMScanone_noeff.js

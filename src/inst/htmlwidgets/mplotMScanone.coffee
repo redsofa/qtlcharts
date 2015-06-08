@@ -19,10 +19,7 @@ HTMLWidgets.widget({
         svg.attr("width", chartOpts.width)
         svg.attr("height", chartOpts.height)
 
-        #if x.show_effects
-        mplotMScanone_eff(widgetdiv, x.lod_data, x.eff_data, x.times, chartOpts)
-        #else
-        #iplotMScanone_noeff(widgetdiv, x.lod_data, x.times, chartOpts)
+        mplotMScanone_noeff(widgetdiv, x.lod_data, x.times, chartOpts)
 
     resize: (widgetdiv, width, height) ->
         d3.select(widgetdiv).select("svg")
