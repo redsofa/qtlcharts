@@ -23,6 +23,9 @@ module.exports = function(grunt){
     //quick test target
     grunt.registerTask('quicktest', ['install', 'shell:quickTest']);
 
+    //quick test target
+    grunt.registerTask('quicktest2', ['install', 'shell:quickTest2']);
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -103,6 +106,14 @@ module.exports = function(grunt){
                             "cd '<%= dist.scratchroot %>'",
                             "R -e 'source (\"testmplotMScanOne.R\") ;'",
                          ].join('&&')
+            },
+            quickTest2:{
+                command: [
+                    "mkdir <%= dist.scratchroot %>",
+                    "cp <%= src.root %>/tests/testiplotMScanOne.R '<%= dist.scratchroot %>'",
+                    "cd '<%= dist.scratchroot %>'",
+                    "R -e 'source (\"testiplotMScanOne.R\") ;'",
+                ].join('&&')
             }
         },
 
