@@ -78,8 +78,8 @@ mplotMScanone <-
 function(scanoneOutput, cross, lodcolumn, pheno.col, times=NULL,
          effects, chr, chartOpts=NULL)
 {
-    if(!any(class(scanoneOutput) == "scanone"))
-        stop('"scanoneOutput" should have class "scanone".')
+#    if(!any(class(scanoneOutput) == "scanone"))
+#        stop('"scanoneOutput" should have class "scanone".')
 
     if(!missing(chr) && !is.null(chr)) {
         rn <- rownames(scanoneOutput)
