@@ -21,6 +21,12 @@ mplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
   lod_ylab = chartOpts?.lod_ylab ? "" # y-axis label for LOD heatmap (also used as x-axis label on effect plot)
   eff_ylim = chartOpts?.eff_ylim ? null # y-axis limits for effect plot (right panel)
   eff_ylab = chartOpts?.eff_ylab ? "" # y-axis label for effect plot (right panel)
+
+  ylab_top = chartOpts?.ylab_top ? "" 
+  ylab_bottom = chartOpts?.ylab_bottom ? "" 
+
+
+
   linecolor = chartOpts?.linecolor ? "darkslateblue" # line color for LOD curves (lower panel)
   eff_linecolor = chartOpts?.eff_linecolor ? null # line color for effect plot (right panel)
   linewidth =  0 # line width for LOD curves (lower panel)
@@ -53,7 +59,7 @@ mplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
   .zthresh(zthresh)
   .quantScale(times)
   .lod_labels(lod_labels)
-  .ylab("Time (hrs)")
+  .ylab(ylab_top)
   .nullcolor(nullcolor)
 
   svg = d3.select(widgetdiv).select("svg")
@@ -75,7 +81,7 @@ mplotMScanone_noeff = (widgetdiv, lod_data, times, chartOpts) ->
   .lightrect(lightrect)
   .ylim([0, d3.max(mylodheatmap.zlim())])
   .pointsAtMarkers(false)
-  .ylab("Expression Value")
+  .ylab(ylab_bottom)
 
   g_lodchart = svg.append("g")
   .attr("transform", "translate(0,#{htop})")
